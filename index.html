@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Frits Jørgensen's Trippelhuse | Johansen Bolig</title>
+  <meta name="description" content="Se og lej en lejlighed i Trippelhusene i Faaborg" />
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Frits Jørgensen's Trippelhuse</a>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="/">Trippelhusene</a></li>
+        <li><a href="/om-os.html">Om os</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="hero-inner">
+      <p id="hero-kicker" class="hero-kicker"></p>
+      <p id="hero-title" class="hero-title"></p>
+    </div>
+  </section>
+
+  <section class="property-block">
+    <h1 id="property-name"></h1>
+    <p id="property-address" class="address"></p>
+  </section>
+
+  <section class="status-banner">
+    <h2 id="status-heading"></h2>
+    <p id="status-text"></p>
+    <p><a id="status-email" class="email" href="#"></a></p>
+    <a id="cta" class="cta-button" href="/kontakt.html"></a>
+  </section>
+
+  <section class="intro">
+    <h2 id="intro-heading"></h2>
+    <div id="intro-text"></div>
+
+    <h3 id="includes-heading"></h3>
+    <ul id="includes-list" class="includes"></ul>
+  </section>
+
+  <section class="listings">
+    <h2 id="listing-heading"></h2>
+    <div id="listings-wrap"></div>
+  </section>
+
+  <footer class="site-footer">
+    <p class="company" id="footer-company"></p>
+    <p id="footer-address"></p>
+    <p><a id="footer-email" class="email" href="#"></a></p>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+  <script>renderHome();</script>
+</body>
+</html>
