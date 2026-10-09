@@ -1,63 +1,591 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Frits Jørgensen's Trippelhuse | Johansen Bolig</title>
-  <meta name="description" content="Se og lej en lejlighed i Trippelhusene i Faaborg" />
-  <link rel="stylesheet" href="/assets/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Johansen Bolig — Lejeboliger i Faaborg &amp; Odense</title>
+<meta name="description" content="Johansen Bolig udlejer restaurerede lejligheder i Faaborg og Odense — bl.a. Trippelhusene og Oluf Bagers Gade 40.">
+<meta property="og:title" content="Johansen Bolig">
+<meta property="og:description" content="Restaurerede lejeboliger i Faaborg og Odense.">
+<meta property="og:image" content="/billeder/forside-trippelhusene.jpeg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#E9C45A">
+<style>image-slot:not([src]):not([data-filled]){visibility:hidden}</style>
+<script src="./support.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Frits Jørgensen's Trippelhuse</a>
-    <nav>
-      <ul class="site-nav">
-        <li><a href="/">Trippelhusene</a></li>
-        <li><a href="/om-os.html">Om os</a></li>
-        <li><a href="/kontakt.html">Kontakt</a></li>
-      </ul>
-    </nav>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin:0; background:#FAF4E4; color:#3A2A20; font-family:'Public Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#A8412D; text-decoration:none; border-bottom:1px solid rgba(168,65,45,0.35); transition:color .2s, border-color .2s; }
+  a:hover { color:#3A2A20; border-bottom-color:#3A2A20; }
+  input, textarea, select, button { font-family:'Public Sans',sans-serif; }
+  input:focus, textarea:focus, select:focus { outline:2px solid rgba(168,65,45,0.45); outline-offset:1px; }
+  image-slot { display:block; }
+</style>
+<script src="./image-slot.js"></script>
+<link rel="icon" type="image/png" href="./billeder/favicon.png">
+<link rel="apple-touch-icon" href="./billeder/apple-touch-icon.png">
+</helmet>
+
+<div style="width:100%;background:#FAF4E4;overflow-x:hidden">
+
+  <header style="position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #D9C27F; background-color: #E9C45A">
+    <div style="max-width:1180px;margin:0 auto;padding:0 28px;min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <button onClick="{{ goForside }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;background:none;border:none;padding:8px 0;cursor:pointer;text-align:left">
+        <span style="font-family:'Fraunces',serif;font-size:24px;letter-spacing:0.01em;color:#3A2A20;line-height:1">Johansen Bolig</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#5C4636">Faaborg &amp; Odense</span>
+      </button>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end;padding:8px 0">
+        <button onClick="{{ goForside }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;padding:9px 13px;cursor:pointer;font-size:14.5px;color:#3A2A20;border-radius:8px" style-hover="background:rgba(168,65,45,0.1)">
+          Forside
+          <sc-if value="{{ isForside }}" hint-placeholder-val="{{ true }}"><span style="display:block;width:100%;height:2px;border-radius:2px;background:#A8412D"></span></sc-if>
+        </button>
+        <button onClick="{{ goTrippel }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;padding:9px 13px;cursor:pointer;font-size:14.5px;color:#3A2A20;border-radius:8px" style-hover="background:rgba(168,65,45,0.1)">
+          Trippelhusene
+          <sc-if value="{{ isTrippel }}"><span style="display:block;width:100%;height:2px;border-radius:2px;background:#A8412D"></span></sc-if>
+        </button>
+        <button onClick="{{ goOluf }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;padding:9px 13px;cursor:pointer;font-size:14.5px;color:#3A2A20;border-radius:8px" style-hover="background:rgba(168,65,45,0.1)">
+          Oluf Bagers Gade
+          <sc-if value="{{ isOluf }}"><span style="display:block;width:100%;height:2px;border-radius:2px;background:#A8412D"></span></sc-if>
+        </button>
+        <button onClick="{{ goLedige }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;padding:9px 13px;cursor:pointer;font-size:14.5px;color:#3A2A20;border-radius:8px" style-hover="background:rgba(168,65,45,0.1)">Ledige lejligheder</button>
+        <a href="#kontakt" style="margin-left:10px;padding:12px 20px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;border-bottom:none;font-size:14.5px" style-hover="background:#7E2E1E">Kontakt os</a>
+      </nav>
+      </sc-if>
+      <sc-if value="{{ isMobile }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:14.5px;cursor:pointer" style-hover="background:#7E2E1E">
+          <span style="display:flex;flex-direction:column;gap:4px;width:16px"><span style="display:block;height:2px;border-radius:2px;background:#FFFFFF"></span><span style="display:block;height:2px;border-radius:2px;background:#FFFFFF"></span><span style="display:block;height:2px;border-radius:2px;background:#FFFFFF"></span></span>
+          {{ menuLabel }}
+        </button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuOpen }}">
+      <div style="border-top:1px solid #D9C27F;background:#FAF4E4;padding:8px 28px 28px;display:flex;flex-direction:column">
+        <button onClick="{{ goForside }}" style="background:none;border:none;border-bottom:1px solid #D9C27F;padding:16px 4px;cursor:pointer;text-align:left;font-family:'Fraunces',serif;font-size:22px;color:#3A2A20">Forside</button>
+        <button onClick="{{ goTrippel }}" style="background:none;border:none;border-bottom:1px solid #D9C27F;padding:16px 4px;cursor:pointer;text-align:left;font-family:'Fraunces',serif;font-size:22px;color:#3A2A20">Trippelhusene</button>
+        <button onClick="{{ goOluf }}" style="background:none;border:none;border-bottom:1px solid #D9C27F;padding:16px 4px;cursor:pointer;text-align:left;font-family:'Fraunces',serif;font-size:22px;color:#3A2A20">Oluf Bagers Gade</button>
+        <button onClick="{{ goLedige }}" style="background:none;border:none;border-bottom:1px solid #D9C27F;padding:16px 4px;cursor:pointer;text-align:left;font-family:'Fraunces',serif;font-size:22px;color:#3A2A20">Ledige lejligheder</button>
+        <a href="#kontakt" onClick="{{ closeMenu }}" style="margin-top:22px;align-self:flex-start;padding:14px 24px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;border-bottom:none;font-size:15px" style-hover="background:#7E2E1E">Kontakt os</a>
+      </div>
+    </sc-if>
   </header>
 
-  <section id="hero" class="hero">
-    <div class="hero-inner">
-      <p id="hero-kicker" class="hero-kicker"></p>
-      <p id="hero-title" class="hero-title"></p>
+  <sc-if value="{{ isForside }}" hint-placeholder-val="{{ true }}">
+    <main>
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(20px,3vw,32px) 28px 0">
+        <div style="position:relative;width:100%;min-height:clamp(420px,60vw,620px);border-radius:24px;overflow:hidden;background:#E6D08F;display:flex;align-items:flex-end">
+          <div style="position:absolute;inset:0"><image-slot id="jb-hero-forside" shape="rect" placeholder="Forsidebillede — Trippelhusene set fra gaden (bredformat)" src="./billeder/forside-trippelhusene.jpeg"></image-slot></div>
+          <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(58,42,32,0.6) 0%,rgba(58,42,32,0.12) 62%,rgba(58,42,32,0) 100%)"></div>
+          <div style="position:relative;width:100%;display:flex;align-items:flex-end;pointer-events:none;padding-top:clamp(160px,34vw,220px)">
+            <div style="padding:clamp(14px,2.4vw,28px);width:100%;max-width:min(100%,540px)">
+              <div style="background:#6E2B1E;border-radius:20px;padding:clamp(20px,2.8vw,32px)">
+                <h1 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(27px,3.8vw,44px);line-height:1.06;letter-spacing:-0.015em;color:#FFF8E3;text-wrap:balance">Gamle huse, gjort i stand til at bo godt i</h1>
+                <p style="margin:14px 0 0;font-size:clamp(15px,1.4vw,17px);line-height:1.6;color:#F1E6C4">Vi er en far og en søn, der køber smukke ejendomme i Faaborg og Odense, sætter dem grundigt i stand og lejer dem ud som hjem.</p>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;pointer-events:auto">
+                <a href="#ledige" style="padding:13px 22px;border-radius:999px;background:#FFF8E3;color:#3A2A20;border:none;border-bottom:none;font-size:15px" style-hover="background:#FAF4E4">Se ledige lejligheder</a>
+                <a href="#kontakt" style="padding:13px 22px;border-radius:999px;background:rgba(248,243,234,0.1);color:#FAF4E4;border:1px solid rgba(248,243,234,0.55);border-bottom:1px solid rgba(248,243,234,0.55);font-size:15px" style-hover="background:rgba(248,243,234,0.2)">Skriv dig på venteliste</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,7.5vw,104px) 28px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(34px,5vw,70px);align-items:start">
+          <div>
+            <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Om Johansen Bolig</p>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,4vw,46px);line-height:1.12;letter-spacing:-0.01em;color:#3A2A20;text-wrap:balance">Far og søn og en forkærlighed for gamle huse</h2>
+            <p style="margin:26px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Johansen Bolig drives af Jan Due Johansen og hans søn Niels Due Johansen. Vi startede vores rejse ved et tilfælde, da vi fik muligheden for at købe Frits Jørgensens Trippelhuse i Faaborg.</p>
+            <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Siden har vi restaureret de arkitekttegnede huse fra 1918 til 15 moderne lejligheder og renoveret alt det udvendige med tanke på det oprindelige. I dag er alle lejligheder i Trippelhusene lejet ud, og vi har sidenhen erhvervet Oluf Bagers Gade 40 i Odense.</p>
+            <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Vi er en lille udlejer, og det kan man mærke. Du taler med os direkte — og vi står selv inde for håndværket bag de vægge, du kommer til at bo mellem.</p>
+                      </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="position:relative;width:100%;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#E6D08F">
+              
+            <img src="./billeder/jan-og-niels.jpg" alt="Jan Due Johansen og Niels Due Johansen foran Trippelhusene" width="1707" height="2560" style="position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover"></div>
+            <p style="margin:0;font-size:13.5px;line-height:1.6;color:#5C4636">Jan Due Johansen og Niels Due Johansen foran Trippelhusene i Faaborg.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,7.5vw,104px) 28px">
+        <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Vores ejendomme</p>
+        <h2 style="margin:0 0 clamp(30px,4vw,50px);font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,4vw,46px);line-height:1.12;color:#3A2A20">To huse med hver sin historie</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(22px,3vw,36px)">
+          <article style="display:flex;flex-direction:column;background:#FFFDF5;border:1px solid #E6D08F;border-radius:22px;overflow:hidden">
+            <div style="position:relative;width:100%;aspect-ratio:3/2;background:#E6D08F">
+              <image-slot id="jb-kort-trippel" shape="rect" placeholder="Trippelhusene — facade" src="./billeder/trippelhusene-facade.jpeg"></image-slot>
+            </div>
+            <div style="padding:clamp(24px,3vw,34px);display:flex;flex-direction:column;gap:13px;flex:1">
+              <p style="margin:0;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#5C4636">Faaborg</p>
+              <h3 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:27px;line-height:1.2;color:#3A2A20">Trippelhusene</h3>
+              <p style="margin:0;font-size:16px;line-height:1.7;color:#4A3626;flex:1">Frits Jørgensens sociale boligbyggeri fra 1918 — gennemrestaureret med nye badeværelser og køkkener, ægte trægulve, synlige bjælker, haveanlæg og ladestandere.</p>
+              <button onClick="{{ goTrippel }}" style="align-self:flex-start;margin-top:6px;padding:13px 22px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:14.5px;cursor:pointer" style-hover="background:#7E2E1E">Læs om Trippelhusene</button>
+            </div>
+          </article>
+          <article style="display:flex;flex-direction:column;background:#FFFDF5;border:1px solid #E6D08F;border-radius:22px;overflow:hidden">
+            <div style="position:relative;width:100%;aspect-ratio:3/2;background:#E6D08F">
+              <image-slot id="jb-kort-oluf" shape="rect" placeholder="Oluf Bagers Gade 40 — facade" src="./billeder/oluf-bagers-gade-facade.jpeg"></image-slot>
+            </div>
+            <div style="padding:clamp(24px,3vw,34px);display:flex;flex-direction:column;gap:13px;flex:1">
+              <p style="margin:0;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#5C4636">Odense C</p>
+              <h3 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:27px;line-height:1.2;color:#3A2A20">Oluf Bagers Gade 40</h3>
+              <p style="margin:0;font-size:16px;line-height:1.7;color:#4A3626;flex:1">Tre boliglejemål på 100, 100 og 75 m² samt et erhvervslejemål på 60 m² — attraktivt beliggende i et smukt og behageligt kvarter tæt på Odense C.</p>
+              <button onClick="{{ goOluf }}" style="align-self:flex-start;margin-top:6px;padding:13px 22px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:14.5px;cursor:pointer" style-hover="background:#7E2E1E">Læs om Oluf Bagers Gade</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="ledige" style="max-width:1180px;margin:0 auto;padding:0 28px clamp(56px,7.5vw,104px);scroll-margin-top:100px">
+        <div style="background:#2F5E75;color:#FFF8E3;border-radius:24px;padding:clamp(22px,5vw,72px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(32px,4.5vw,64px);align-items:start">
+            <div>
+              <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#F5D68A">Ledige lejligheder</p>
+              <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(29px,3.8vw,44px);line-height:1.12;color:#FFF8E3;text-wrap:balance">Er der noget ledigt lige nu?</h2>
+              <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:clamp(16px,4vw,22px);border-radius:16px;background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18)">
+                  <div>
+                    <p style="margin:0;font-family:'Fraunces',serif;font-size:22px;color:#FFF8E3">Trippelhusene, Faaborg</p>
+                    <p style="margin:6px 0 0;font-size:14px;color:#F1E6C4">2- og 3-værelseslejligheder</p>
+                  </div>
+                  <span style="padding:9px 16px;border-radius:999px;border:1px solid rgba(245,214,138,0.6);font-size:13.5px;line-height:1.35;color:#FFF8E3">{{ trippelStatus }}</span>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:clamp(16px,4vw,22px);border-radius:16px;background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18)">
+                  <div>
+                    <p style="margin:0;font-family:'Fraunces',serif;font-size:22px;color:#FFF8E3">Oluf Bagers Gade 40, Odense</p>
+                    <p style="margin:6px 0 0;font-size:14px;color:#F1E6C4">3 boliglejemål · 1 erhvervslejemål</p>
+                  </div>
+                  <span style="padding:9px 16px;border-radius:999px;border:1px solid rgba(245,214,138,0.6);font-size:13.5px;line-height:1.35;color:#FFF8E3">{{ olufStatus }}</span>
+                </div>
+              </div>
+              <p style="margin:26px 0 0;font-size:16px;line-height:1.7;color:#F1E6C4;max-width:34em">Send os en besked, så tager vi kontakt, når der bliver en bolig fri, der passer til dig.</p>
+            </div>
+            <div style="background:#FAF4E4;color:#3A2A20;border-radius:20px;padding:clamp(20px,3.5vw,40px);display:flex;flex-direction:column;gap:22px;min-width:0">
+              <div>
+                <h3 style="margin:0 0 8px;font-family:'Fraunces',serif;font-weight:500;font-size:27px;line-height:1.2">Kontakt os</h3>
+                <p style="margin:0;font-size:15px;line-height:1.65;color:#5C4636">Skriv eller ring, hvis du vil skrives op eller høre om en bolig. Vi svarer selv.</p>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding-top:18px;border-top:1px solid #E6D08F">
+                <span style="font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:#5C4636">E-mail</span>
+                <a href="mailto:kontakt@johansenbolig.dk" style="align-self:flex-start;font-family:'Fraunces',serif;font-size:clamp(17px,4.6vw,23px);color:#3A2A20;border-bottom-color:rgba(58,42,32,0.3);overflow-wrap:anywhere">{{ email }}</a>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding-top:18px;border-top:1px solid #E6D08F">
+                <span style="font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:#5C4636">Telefon</span>
+                <img src="./billeder/tlf-moerk.png" alt="Telefonnummer" width="120" height="31" style="display:block;width:120px;height:auto">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding-top:18px;border-top:1px solid #E6D08F">
+                <span style="font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:#5C4636">Kontaktperson</span>
+                <span style="font-size:16px;line-height:1.7;color:#4A3626">Niels Due Johansen</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isTrippel }}">
+    <main>
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(20px,3vw,32px) 28px 0">
+        <div style="position:relative;width:100%;min-height:clamp(380px,54vw,560px);border-radius:24px;overflow:hidden;background:#E6D08F;display:flex;align-items:flex-end">
+          <div style="position:absolute;inset:0"><image-slot id="jb-hero-trippel" src="./billeder/trippelhusene-hero.webp" shape="rect" placeholder="Trippelhusene — hovedbillede i bredformat"></image-slot></div>
+          <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(58,42,32,0.6) 0%,rgba(58,42,32,0.12) 62%,rgba(58,42,32,0) 100%)"></div>
+          <div style="position:relative;width:100%;display:flex;align-items:flex-end;pointer-events:none;padding-top:clamp(160px,34vw,220px)">
+            <div style="padding:clamp(18px,2.4vw,28px);width:100%;max-width:min(100%,600px)">
+              <div style="background:#6E2B1E;border-radius:20px;padding:clamp(24px,3.2vw,36px)">
+                <p style="margin:0 0 14px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#F5D68A">Faaborg · opført 1918</p>
+                <h1 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(31px,4.2vw,50px);line-height:1.07;letter-spacing:-0.015em;color:#FFF8E3">Frits Jørgensens Trippelhuse</h1>
+                <p style="margin:18px 0 0;font-size:clamp(15.5px,1.5vw,18px);line-height:1.65;color:#F1E6C4">Fra bevaringsværdigt forfald til moderne lejligheder — uden at huset mistede sin karakter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,7.5vw,100px) 28px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(34px,5vw,70px);align-items:start">
+          <div>
+            <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Historien</p>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20;text-wrap:balance">Socialt boligbyggeri med arkitekttegnede detaljer</h2>
+            <p style="margin:26px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Trippelhusene blev opført i 1918 efter tegninger af arkitekt Frits Jørgensen. Tanken var enkel og meget moderne for sin tid: ordentlige boliger til almindelige familier, bygget med samme omhu som de finere huse i Faaborg — gode proportioner, håndværksmæssige detaljer og lys i alle rum.</p>
+            <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Da vi overtog husene, var de bevaringsværdige, men slidte. Vi har gennemrestaureret dem indefra og ud: nye installationer, nye badeværelser og køkkener, istandsat træværk og bevarede bjælker. Det, der kunne redde, er reddet. Det, der skulle fornyes, er fornyet i samme ånd.</p>
+            <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Resultatet er lejligheder, hvor man mærker husets alder — og samtidig har varme i gulvet på badeværelset og opvaskemaskine i køkkenet.</p>
+          </div>
+          <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:20px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:24px">
+            <div>
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#2F5E75">1918</p>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.65;color:#4A3626">Husene opføres som socialt boligbyggeri efter Frits Jørgensens tegninger.</p>
+            </div>
+            <div style="height:1px;background:#D9C27F"></div>
+            <div>
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#2F5E75">Overtagelsen</p>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.65;color:#4A3626">Husene gives væk for et symbolsk beløb på én krone, da de er helt nedslidte og stadig kun har bad og toilet i kælderen.</p>
+            </div>
+            <div style="height:1px;background:#D9C27F"></div>
+            <div>
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#2F5E75">Restaureringen</p>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.65;color:#4A3626">17 millioner kroner investeres i tag, installationer, køkkener, badeværelser og haveanlæg.</p>
+            </div>
+            <div style="height:1px;background:#D9C27F"></div>
+            <div>
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#2F5E75">2025</p>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.65;color:#4A3626">Alle lejligheder klar til benyttelse.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#F2E0AE;border-top:1px solid #E6D08F;border-bottom:1px solid #E6D08F">
+        <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px">
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Lejligheden inkluderer</p>
+          <h2 style="margin:0 0 clamp(28px,4vw,46px);font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20">Hvad du får med, når du flytter ind</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0 0 12px;font-family:'Fraunces',serif;font-size:19px;color:#A8412D">01</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A3626">Stort, nyt flisebadeværelse med egen vaskemaskine og tørretumbler — og varme i gulvet.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0 0 12px;font-family:'Fraunces',serif;font-size:19px;color:#A8412D">02</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A3626">Nyt køkken med alt i hvidevarer, herunder opvaskemaskine.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0 0 12px;font-family:'Fraunces',serif;font-size:19px;color:#A8412D">03</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A3626">Ægte trægulve, synlige bjælker og træværk med detaljer.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0 0 12px;font-family:'Fraunces',serif;font-size:19px;color:#A8412D">04</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A3626">Haveanlæg med flere terrasser til fælles brug.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0 0 12px;font-family:'Fraunces',serif;font-size:19px;color:#A8412D">05</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A3626">Parkeringspladser med ladestander til elbil.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0 0 12px;font-family:'Fraunces',serif;font-size:19px;color:#A8412D">06</p>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#4A3626">Beboerrum til fælles brug — og et tæt sammenhold mellem naboerne i ejendommen.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:clamp(22px,3vw,34px)">
+          <div>
+            <p style="margin:0 0 16px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Galleri</p>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20">Husene, lejlighederne og haven</h2>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+          <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
+            <image-slot id="jb-t-galleri-1" src="./billeder/trippel-galleri-1-facade.webp" shape="rect" placeholder="Facade efter restaurering"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
+            <image-slot id="jb-t-galleri-2" src="./billeder/trippel-galleri-2-koekken.webp" shape="rect" placeholder="Samtalekøkken"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
+            <image-slot id="jb-t-galleri-3" src="./billeder/trippel-galleri-3-bad.webp" shape="rect" placeholder="Badeværelse"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
+            <image-slot id="jb-t-galleri-4" src="./billeder/trippel-galleri-4-stue.webp" shape="rect" placeholder="Stue med synlige bjælker"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
+            <image-slot id="jb-t-galleri-5" src="./billeder/trippel-galleri-5-lejlighed.webp" shape="rect" placeholder="Billede fra lejlighed"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
+            <image-slot id="jb-t-galleri-6" src="./billeder/trippel-galleri-6-bad-2.webp" shape="rect" placeholder="Badeværelse 2. sal"></image-slot>
+          </div>
+        </div>
+      </section>
+
+      <sc-if value="{{ visMedieomtale }}">
+        <section style="max-width:1180px;margin:0 auto;padding:0 28px clamp(52px,7vw,92px)">
+          <div style="background:#2F5E75;color:#FFF8E3;border-radius:24px;padding:clamp(22px,5vw,72px)">
+            <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#F5D68A">Medieomtale</p>
+            <h2 style="margin:0 0 clamp(28px,4vw,44px);font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#FFF8E3;max-width:26em;text-wrap:balance">Projektet har fået opmærksomhed langt ud over Faaborg</h2>
+            <blockquote style="margin:0 0 clamp(30px,4vw,48px);padding-left:clamp(20px,2.5vw,32px);border-left:2px solid #F5D68A;max-width:26em">
+              <p style="margin:0;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,2.6vw,31px);line-height:1.35;color:#FFF8E3">„Fra bevaringsværdigt skrot til slot for 17 millioner.“</p>
+              <cite style="display:block;margin-top:16px;font-style:normal;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#F1E6C4">Fyens Stiftstidende</cite>
+            </blockquote>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px">
+              <article style="background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
+                <div style="position:relative;width:100%;aspect-ratio:16/10;background:rgba(248,243,234,0.12)">
+                  <image-slot id="jb-medie-1" src="./billeder/medie-1-fyens-en-krone.webp" shape="rect" placeholder="Screenshot — fyens.dk: Købte for én krone"></image-slot>
+                </div>
+                <div style="padding:clamp(22px,2.8vw,30px);display:flex;flex-direction:column;gap:12px;flex:1">
+                <p style="margin:0;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#F5D68A">fyens.dk</p>
+                <h3 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.3;color:#FFF8E3">Købte historiske bygninger for én krone og renoverede for 17 mio.</h3>
+                <p style="margin:0;font-size:15px;line-height:1.65;color:#F1E6C4;flex:1">Om beslutningen, økonomien — og at kautionere med alt, hvad man ejer.</p>
+                <a href="https://fyens.dk/faaborg-midtfyn/koebte-historiske-bygninger-for-en-krone-og-renoverede-for-17-mio-har-kautioneret-med-alt-vi-ejer" target="_blank" rel="noopener" style="color:#FFF8E3;border-bottom-color:rgba(255,248,227,0.45);font-size:14.5px;align-self:flex-start">Læs artiklen</a>
+              </div>
+              </article>
+              <article style="background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
+                <div style="position:relative;width:100%;aspect-ratio:16/10;background:rgba(248,243,234,0.12)">
+                  <image-slot id="jb-medie-2" src="./billeder/medie-2-fyens-forvandlingen.webp" shape="rect" placeholder="Screenshot — fyens.dk: Se forvandlingen"></image-slot>
+                </div>
+                <div style="padding:clamp(22px,2.8vw,30px);display:flex;flex-direction:column;gap:12px;flex:1">
+                <p style="margin:0;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#F5D68A">fyens.dk</p>
+                <h3 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.3;color:#FFF8E3">Se forvandlingen: Fra bevaringsværdigt skrot til slot</h3>
+                <p style="margin:0;font-size:15px;line-height:1.65;color:#F1E6C4;flex:1">Før og efter — og meldingen om, at alle lejligheder er lejet ud.</p>
+                <a href="https://fyens.dk/faaborg-midtfyn/se-forvandlingen-fra-bevaringsvaerdigt-skrot-til-slot-for-17-millioner" target="_blank" rel="noopener" style="color:#FFF8E3;border-bottom-color:rgba(255,248,227,0.45);font-size:14.5px;align-self:flex-start">Læs artiklen</a>
+              </div>
+              </article>
+              <article style="background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
+                <div style="position:relative;width:100%;aspect-ratio:16/10;background:rgba(248,243,234,0.12)">
+                  <image-slot id="jb-medie-3" src="./billeder/medie-3-det-rigtige-faaborg.webp" shape="rect" placeholder="Screenshot — Det Rigtige Faaborg"></image-slot>
+                </div>
+                <div style="padding:clamp(22px,2.8vw,30px);display:flex;flex-direction:column;gap:12px;flex:1">
+                <p style="margin:0;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#F5D68A">Det Rigtige Faaborg</p>
+                <h3 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.3;color:#FFF8E3">Far og søn har renoveret Trippelhusene</h3>
+                <p style="margin:0;font-size:15px;line-height:1.65;color:#F1E6C4;flex:1">Om købet for én krone, de store badeværelser og den varme modtagelse fra naboerne på Odensevej.</p>
+                <a href="https://www.detrigtigefaaborg.dk/2025/07/29/jan-due-johansen-og-niels-johansen-har-renoveret-trippelhusene/" target="_blank" rel="noopener" style="color:#FFF8E3;border-bottom-color:rgba(255,248,227,0.45);font-size:14.5px;align-self:flex-start">Læs artiklen</a>
+              </div>
+              </article>
+            </div>
+            
+          </div>
+        </section>
+      </sc-if>
+
+      <section style="max-width:1180px;margin:0 auto;padding:0 28px clamp(56px,7.5vw,100px)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;background:#FFFDF5;border:1px solid #E6D08F;border-radius:22px;padding:clamp(28px,4vw,48px)">
+          <div>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3vw,34px);line-height:1.2;color:#3A2A20">Vil du bo i Trippelhusene?</h2>
+            <p style="margin:12px 0 0;max-width:34em;font-size:16px;line-height:1.7;color:#4A3626">Hvis du ønsker en lejlighed i Trippelhusene, kan du skrive dig op ved at kontakte os.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button onClick="{{ goLedige }}" style="padding:14px 24px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:15px;cursor:pointer" style-hover="background:#7E2E1E">Skriv dig på venteliste</button>
+            <a href="#kontakt" style="padding:14px 24px;border-radius:999px;background:#F2E0AE;color:#3A2A20;border:1px solid #E6D08F;border-bottom:1px solid #E6D08F;font-size:15px" style-hover="background:#E6D08F">Se kontaktinfo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isOluf }}">
+    <main>
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(20px,3vw,32px) 28px 0">
+        <div style="position:relative;width:100%;min-height:clamp(380px,54vw,560px);border-radius:24px;overflow:hidden;background:#E6D08F;display:flex;align-items:flex-end">
+          <div style="position:absolute;inset:0"><image-slot id="jb-hero-oluf" src="./billeder/oluf-bagers-gade-hero.webp" shape="rect" placeholder="Oluf Bagers Gade 40 — hovedbillede i bredformat"></image-slot></div>
+          <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(58,42,32,0.6) 0%,rgba(58,42,32,0.12) 62%,rgba(58,42,32,0) 100%)"></div>
+          <div style="position:relative;width:100%;display:flex;align-items:flex-end;pointer-events:none;padding-top:clamp(160px,34vw,220px)">
+            <div style="padding:clamp(18px,2.4vw,28px);width:100%;max-width:min(100%,600px)">
+              <div style="background:#2F5E75;border-radius:20px;padding:clamp(24px,3.2vw,36px)">
+                <p style="margin:0 0 14px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#F5D68A">Odense C</p>
+                <h1 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(31px,4.2vw,50px);line-height:1.07;letter-spacing:-0.015em;color:#FFF8E3">Oluf Bagers Gade 40</h1>
+                <p style="margin:18px 0 0;font-size:clamp(15.5px,1.5vw,18px);line-height:1.65;color:#F1E6C4">Tre boliglejemål og et erhvervslejemål i et af Odenses smukkeste kvarterer — få minutters gang fra byens centrum.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,7.5vw,100px) 28px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(34px,5vw,70px);align-items:start">
+          <div>
+            <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Om ejendommen</p>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20;text-wrap:balance">Rummelige lejligheder midt i det gamle Odense</h2>
+            <p style="margin:26px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Oluf Bagers Gade 40 rummer tre boliglejemål på henholdsvis 100, 100 og 75 kvadratmeter samt et erhvervslejemål på 60 kvadratmeter. Lejlighederne er rummelige med god loftshøjde og lys fra flere sider — plads til både familie, hjemmearbejdsplads og gæster.</p>
+            <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#4A3626;text-wrap:pretty">Ejendommen ligger attraktivt tæt på Odense C, i et behageligt og smukt område, hvor gaderne er gamle og stille, men alt ligger inden for gåafstand. Det er kvarteret, hvor man kan gå til togstationen med en kuffert og hjem igen med indkøb fra torvet.</p>
+            
+          </div>
+          <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:20px;padding:clamp(24px,3vw,36px)">
+            <h3 style="margin:0 0 20px;font-family:'Fraunces',serif;font-weight:500;font-size:24px;line-height:1.2;color:#3A2A20">Lejemål i ejendommen</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid #D9C27F">
+                <span style="font-size:16px;color:#4A3626">Boliglejemål</span>
+                <span style="font-family:'Fraunces',serif;font-size:22px;color:#A8412D;white-space:nowrap">100 m²</span>
+              </div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid #D9C27F">
+                <span style="font-size:16px;color:#4A3626">Boliglejemål</span>
+                <span style="font-family:'Fraunces',serif;font-size:22px;color:#A8412D;white-space:nowrap">100 m²</span>
+              </div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid #D9C27F">
+                <span style="font-size:16px;color:#4A3626">Boliglejemål</span>
+                <span style="font-family:'Fraunces',serif;font-size:22px;color:#A8412D;white-space:nowrap">75 m²</span>
+              </div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px">
+                <span style="font-size:16px;color:#4A3626">Erhvervslejemål</span>
+                <span style="font-family:'Fraunces',serif;font-size:22px;color:#A8412D;white-space:nowrap">60 m²</span>
+              </div>
+            </div>
+            <div style="margin-top:24px;padding:18px;border-radius:14px;background:#2F5E75">
+              <p style="margin:0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#F5D68A">Status</p>
+              <p style="margin:8px 0 0;font-family:'Fraunces',serif;font-size:21px;line-height:1.3;color:#FFF8E3">{{ olufStatus }}</p>
+            </div>
+            <a href="#kontakt" style="display:inline-block;margin-top:20px;padding:13px 22px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;border-bottom:none;font-size:14.5px" style-hover="background:#7E2E1E">Hør om muligheder</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#F2E0AE;border-top:1px solid #E6D08F;border-bottom:1px solid #E6D08F">
+        <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px">
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Kvarteret</p>
+          <h2 style="margin:0 0 clamp(28px,4vw,44px);font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20;max-width:24em">Alt i gåafstand — og stille, når du lukker døren</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px">
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#3A2A20">Odense C</p>
+              <p style="margin:8px 0 0;font-size:15.5px;line-height:1.65;color:#4A3626">Banegården og busterminalen ligger få minutter væk — under to timer til København.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#3A2A20">Den gamle by</p>
+              <p style="margin:8px 0 0;font-size:15.5px;line-height:1.65;color:#4A3626">Brostens­gader, Domkirken og H.C. Andersen Kvarteret som nærmeste naboer.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#3A2A20">Kultur og café</p>
+              <p style="margin:8px 0 0;font-size:15.5px;line-height:1.65;color:#4A3626">Brandts, biblioteket, restauranter og indkøb — alt sammen uden at tage bilen.</p>
+            </div>
+            <div style="background:#FFFDF5;border:1px solid #E6D08F;border-radius:18px;padding:clamp(22px,2.6vw,30px)">
+              <p style="margin:0;font-family:'Fraunces',serif;font-size:20px;color:#3A2A20">Grønt tæt på</p>
+              <p style="margin:8px 0 0;font-size:15.5px;line-height:1.65;color:#4A3626">Munke Mose og åstien ligger lige om hjørnet, når dagen skal luftes ud.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:clamp(22px,3vw,34px)">
+          <div>
+            <p style="margin:0 0 16px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Galleri</p>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20">Huset og lejlighederne</h2>
+          </div>
+        </div><div style="display:grid;grid-template-columns:{{ galCols }};gap:16px">
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galFacadeCol }};grid-row:{{ galFacadeRow }};aspect-ratio:{{ galFacadeAspect }};min-height:320px">
+            <image-slot id="jb-o-galleri-1" shape="rect" placeholder="Facaden mod Oluf Bagers Gade" src="./billeder/oluf-galleri-1-facade.jpeg"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galSmall }};aspect-ratio:4/3">
+            <image-slot id="jb-o-galleri-2" shape="rect" placeholder="Gårdside eller opgang" src="./billeder/oluf-galleri-2-gaard.jpeg"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galSmall }};aspect-ratio:4/3">
+            <image-slot id="jb-o-galleri-3" shape="rect" placeholder="Stue i 100 m²-lejligheden" src="./billeder/oluf-galleri-3-stue.jpeg"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galSmall }};aspect-ratio:4/3">
+            <image-slot id="jb-o-galleri-4" shape="rect" placeholder="Køkken" src="./billeder/oluf-galleri-4-koekken.jpeg"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galSmall }};aspect-ratio:4/3">
+            <image-slot id="jb-o-galleri-6" shape="rect" placeholder="Køkken 2" src="./billeder/oluf-galleri-5-koekken-2.jpeg"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galWide }};aspect-ratio:16/10">
+            <image-slot id="jb-o-galleri-7" shape="rect" placeholder="Badeværelse" src="./billeder/oluf-galleri-6-bad.jpeg"></image-slot>
+          </div>
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galWide }};aspect-ratio:16/10">
+            <image-slot id="jb-o-galleri-8" shape="rect" placeholder="Badeværelse 2" src="./billeder/oluf-galleri-7-bad-2.jpeg"></image-slot>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1180px;margin:0 auto;padding:0 28px clamp(56px,7.5vw,100px)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;background:#FFFDF5;border:1px solid #E6D08F;border-radius:22px;padding:clamp(28px,4vw,48px)">
+          <div>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3vw,34px);line-height:1.2;color:#3A2A20">Vil du bo på Oluf Bagers Gade?</h2>
+            <p style="margin:12px 0 0;max-width:34em;font-size:16px;line-height:1.7;color:#4A3626">Status lige nu: {{ olufStatus }}. Skriv til os, så kontakter vi dig, når et lejemål bliver ledigt.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button onClick="{{ goLedige }}" style="padding:14px 24px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:15px;cursor:pointer" style-hover="background:#7E2E1E">Skriv dig på venteliste</button>
+            <a href="#kontakt" style="padding:14px 24px;border-radius:999px;background:#F2E0AE;color:#3A2A20;border:1px solid #E6D08F;border-bottom:1px solid #E6D08F;font-size:15px" style-hover="background:#E6D08F">Se kontaktinfo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <footer id="kontakt" style="background:#234A5E;color:#FFF3D1;scroll-margin-top:90px">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px clamp(30px,4vw,44px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(30px,4vw,56px)">
+        <div>
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#FFE08A">Kontakt</p>
+          <h2 style="margin:0 0 20px;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.4vw,38px);line-height:1.14;color:#FFF3D1">Skriv eller ring — vi svarer selv</h2>
+          <p style="margin:0 0 8px;font-size:17px;line-height:1.7;color:#FFE08A"><a href="mailto:kontakt@johansenbolig.dk" style="overflow-wrap:anywhere;color:#FFE08A;border-bottom-color:rgba(255,224,138,0.4)">{{ email }}</a></p>
+          <img src="./billeder/tlf-lys.png" alt="Telefonnummer" width="92" height="24" style="display:block;width:92px;height:auto;margin-top:4px">
+        </div>
+        <div>
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#FFE08A">Johansen Bolig</p>
+          <p style="margin:0;font-size:16px;line-height:1.8;color:#FFF3D1">Jan Due Johansen<br>Niels Due Johansen</p>
+          <p style="margin:14px 0 0;font-size:14.5px;line-height:1.7;color:#FFF3D1">Privat udlejning af ejendomme i Faaborg og Odense.</p>
+        </div>
+        <div>
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#FFE08A">Ejendomme</p>
+          <p style="margin:0 0 14px;font-size:16px;line-height:1.6;color:#FFF3D1">Trippelhusene<br>Odensevej 6-10<br>5600 Faaborg</p>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:#FFF3D1">Oluf Bagers Gade 40<br>5000 Odense C</p>
+        </div>
+        <div>
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#FFE08A">Genveje</p>
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+            <button onClick="{{ goForside }}" style="background:none;border:none;padding:0;cursor:pointer;font-size:16px;color:#FFE08A;text-align:left" style-hover="color:#FFF3D1">Forside</button>
+            <button onClick="{{ goTrippel }}" style="background:none;border:none;padding:0;cursor:pointer;font-size:16px;color:#FFE08A;text-align:left" style-hover="color:#FFF3D1">Trippelhusene</button>
+            <button onClick="{{ goOluf }}" style="background:none;border:none;padding:0;cursor:pointer;font-size:16px;color:#FFE08A;text-align:left" style-hover="color:#FFF3D1">Oluf Bagers Gade</button>
+            <button onClick="{{ goLedige }}" style="background:none;border:none;padding:0;cursor:pointer;font-size:16px;color:#FFE08A;text-align:left" style-hover="color:#FFF3D1">Ledige lejligheder</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:clamp(36px,5vw,64px);padding-top:22px;border-top:1px solid rgba(255,243,209,0.22);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between">
+        <p style="margin:0;font-size:13.5px;color:#FFF3D1">© Johansen Bolig · CVR-nr. 44317672</p>
+        <p style="margin:0;font-size:13.5px;color:#FFF3D1">Faaborg &amp; Odense, Danmark</p>
+      </div>
     </div>
-  </section>
-
-  <section class="property-block">
-    <h1 id="property-name"></h1>
-    <p id="property-address" class="address"></p>
-  </section>
-
-  <section class="status-banner">
-    <h2 id="status-heading"></h2>
-    <p id="status-text"></p>
-    <p><a id="status-email" class="email" href="#"></a></p>
-    <a id="cta" class="cta-button" href="/kontakt.html"></a>
-  </section>
-
-  <section class="intro">
-    <h2 id="intro-heading"></h2>
-    <div id="intro-text"></div>
-
-    <h3 id="includes-heading"></h3>
-    <ul id="includes-list" class="includes"></ul>
-  </section>
-
-  <section class="listings">
-    <h2 id="listing-heading"></h2>
-    <div id="listings-wrap"></div>
-  </section>
-
-  <footer class="site-footer">
-    <p class="company" id="footer-company"></p>
-    <p id="footer-address"></p>
-    <p><a id="footer-email" class="email" href="#"></a></p>
   </footer>
 
-  <script src="/assets/site.js"></script>
-  <script>renderHome();</script>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;trippelStatus&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Alle lejligheder er udlejet&quot;,&quot;Ledige lejligheder — kontakt os&quot;,&quot;Venteliste åben&quot;],&quot;default&quot;:&quot;Alle lejligheder er udlejet&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Udlejningsstatus&quot;},&quot;olufStatus&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Udlejning på vej&quot;,&quot;Alle lejligheder er udlejet&quot;,&quot;Ledige lejligheder — kontakt os&quot;],&quot;default&quot;:&quot;Alle lejligheder er udlejet&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Udlejningsstatus&quot;},&quot;visMedieomtale&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Indhold&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;kontakt@johansenbolig.dk&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Kontakt&quot;}}">
+class Component extends DCLogic {
+  state = { mobile: typeof window !== 'undefined' && window.innerWidth < 820, menuOpen: false, page: 'forside', sendt: false };
+
+  go(p) {
+    this.setState({ page: p, menuOpen: false });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  componentDidMount() {
+    this.onResize = () => { const m = window.innerWidth < 820; if (m !== this.state.mobile) this.setState({ mobile: m, menuOpen: false }); };
+    window.addEventListener('resize', this.onResize); this.onResize();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+
+  renderVals() {
+    const p = this.state.page;
+    return {
+      isForside: p === 'forside',
+      isTrippel: p === 'trippel',
+      isOluf: p === 'oluf',
+      goForside: () => this.go('forside'),
+      goTrippel: () => this.go('trippel'),
+      goOluf: () => this.go('oluf'),
+      isMobile: this.state.mobile,
+      galCols: this.state.mobile ? 'minmax(0,1fr)' : 'repeat(6,minmax(0,1fr))',
+      galFacadeCol: this.state.mobile ? 'auto' : '1 / span 2',
+      galFacadeRow: this.state.mobile ? 'auto' : '1 / span 2',
+      galFacadeAspect: this.state.mobile ? '3/4' : 'auto',
+      galSmall: this.state.mobile ? 'auto' : 'span 2',
+      galWide: this.state.mobile ? 'auto' : 'span 3',
+      isDesktop: !this.state.mobile,
+      menuOpen: this.state.mobile && this.state.menuOpen,
+      menuLabel: this.state.menuOpen ? 'Luk' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      goLedige: () => {
+        this.setState({ page: 'forside', menuOpen: false });
+        requestAnimationFrame(() => {
+          const el = document.getElementById('ledige');
+          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+        });
+      },
+      trippelStatus: this.props.trippelStatus ?? 'Alle lejligheder er udlejet',
+      olufStatus: this.props.olufStatus ?? 'Alle lejligheder er udlejet',
+      email: this.props.email ?? 'kontakt@johansenbolig.dk',
+            visMedieomtale: this.props.visMedieomtale ?? true,
+    };
+  }
+}
+</script>
 </body>
 </html>

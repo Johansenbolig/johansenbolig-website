@@ -1,8 +1,25 @@
 [build]
   publish = "."
 
+# Gamle sider fra den tidligere hjemmeside sendes videre til den nye forside
+[[redirects]]
+  from = "/om-os.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/kontakt.html"
+  to = "/"
+  status = 301
+
+[[headers]]
+  for = "/billeder/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
