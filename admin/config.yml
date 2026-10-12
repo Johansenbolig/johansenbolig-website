@@ -1,0 +1,51 @@
+# Redigeringspanel for johansenbolig.dk (Sveltia CMS)
+# Gemmer i admin/indstillinger.json. Siden læser filen direkte fra GitHub,
+# så en rettelse her kræver ikke en ny udgivelse på Netlify (0 credits).
+backend:
+  name: github
+  repo: Johansenbolig/johansenbolig-website
+  branch: main
+  commit_messages:
+    update: "Redigeringspanel: opdater {{slug}}"
+
+media_folder: admin/billeder
+public_folder: /admin/billeder
+site_url: https://johansenbolig.dk
+display_url: https://johansenbolig.dk
+
+collections:
+  - name: indstillinger
+    label: Udlejning og kontakt
+    files:
+      - name: indstillinger
+        label: Udlejning og kontakt
+        file: admin/indstillinger.json
+        format: json
+        fields:
+          - name: trippelStatus
+            label: "Trippelhusene – status"
+            hint: "Vises på forsiden under Ledige lejligheder."
+            widget: select
+            options:
+              - "Alle lejligheder er udlejet"
+              - "Ledige lejligheder — kontakt os"
+              - "Venteliste åben"
+            default: "Alle lejligheder er udlejet"
+          - name: olufStatus
+            label: "Oluf Bagers Gade 40 – status"
+            hint: "Vises på forsiden og på Oluf Bagers Gade-siden."
+            widget: select
+            options:
+              - "Alle lejligheder er udlejet"
+              - "Ledige lejligheder — kontakt os"
+              - "Udlejning på vej"
+            default: "Alle lejligheder er udlejet"
+          - name: email
+            label: "E-mail på siden"
+            hint: "Bruges både som tekst og som link, man kan klikke på."
+            widget: string
+            default: "kontakt@johansenbolig.dk"
+          - name: visMedieomtale
+            label: "Vis presseomtale på Trippelhusene-siden"
+            widget: boolean
+            default: true
