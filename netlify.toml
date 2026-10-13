@@ -4,6 +4,13 @@
   # (rettelser fra redigeringspanelet læses direkte fra GitHub) – sparer credits
   ignore = "bash admin/netlify-ignore.sh"
 
+# Mailværktøjet ligger i repo'et, men må ikke kunne hentes fra hjemmesiden
+[[redirects]]
+  from = "/mailvaerktoej/*"
+  to = "/"
+  status = 404
+  force = true
+
 # Gamle sider fra den tidligere hjemmeside sendes videre til den nye forside
 [[redirects]]
   from = "/om-os.html"
