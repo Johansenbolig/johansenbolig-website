@@ -29,6 +29,7 @@
   input, textarea, select, button { font-family:'Public Sans',sans-serif; }
   input:focus, textarea:focus, select:focus { outline:2px solid rgba(168,65,45,0.45); outline-offset:1px; }
   image-slot { display:block; }
+  image-slot::part(ring) { display:none; }
 </style>
 <script src="./image-slot.js"></script>
 <link rel="icon" type="image/png" href="./billeder/favicon.png">
@@ -40,8 +41,7 @@
   <header style="position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #D9C27F; background-color: #E9C45A">
     <div style="max-width:1180px;margin:0 auto;padding:0 28px;min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
       <button onClick="{{ goForside }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;background:none;border:none;padding:8px 0;cursor:pointer;text-align:left">
-        <span style="font-family:'Fraunces',serif;font-size:24px;letter-spacing:0.01em;color:#3A2A20;line-height:1">Johansen Bolig</span>
-        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#5C4636">Faaborg &amp; Odense</span>
+        <img src="./billeder/logo-groen.png" alt="Johansen Bolig" width="640" height="108" style="display:block;height:{{ logoH }};width:auto">
       </button>
       <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
       <nav style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end;padding:8px 0">
@@ -240,7 +240,7 @@
             <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20">Husene og lejlighederne</h2>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+        <div style="display:grid;grid-template-columns:{{ trippelGalCols }};gap:{{ galGap }}">
           <div style="position:relative;min-width:0;width:100%;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:#E6D08F">
             <image-slot id="jb-t-galleri-1" src="./billeder/trippel-galleri-1-facade.webp" shape="rect" placeholder="Facade efter restaurering"></image-slot>
           </div>
@@ -295,23 +295,11 @@
         </div>
       </section>
 
-      <section style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px">
-        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;background:#FFFDF5;border:1px solid #E6D08F;border-radius:22px;padding:clamp(28px,4vw,48px)">
-          <div>
-            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3vw,34px);line-height:1.2;color:#3A2A20">Vil du bo i Trippelhusene?</h2>
-            <p style="margin:12px 0 0;max-width:34em;font-size:16px;line-height:1.7;color:#4A3626">Hvis du ønsker en lejlighed i Trippelhusene, kan du skrive dig op ved at kontakte os.</p>
-          </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <button onClick="{{ goLedige }}" style="padding:14px 24px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:15px;cursor:pointer" style-hover="background:#7E2E1E">Skriv dig på venteliste</button>
-            <a href="#kontakt" style="padding:14px 24px;border-radius:999px;background:#F2E0AE;color:#3A2A20;border:1px solid #E6D08F;border-bottom:1px solid #E6D08F;font-size:15px" style-hover="background:#E6D08F">Se kontaktinfo</a>
-          </div>
-        </div>
-      </section>
       <sc-if value="{{ visMedieomtale }}">
-        <section style="max-width:1180px;margin:0 auto;padding:0 28px clamp(52px,7vw,92px)">
+        <section style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px 0">
           <div style="background:#2F5E75;color:#FFF8E3;border-radius:24px;padding:clamp(22px,5vw,72px)">
             <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#F5D68A">Medieomtale</p>
-            <h2 style="margin:0 0 clamp(28px,4vw,44px);font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#FFF8E3;max-width:26em;text-wrap:balance">Projektet har fået opmærksomhed langt ud over Faaborg</h2>
+            <h2 style="margin:0 0 clamp(28px,4vw,44px);font-family:'Fraunces',serif;font-weight:500;font-size:{{ medieFs }};line-height:1.14;color:#FFF8E3;max-width:26em;text-wrap:{{ medieWrap }}">Projektet har fået opmærksomhed langt&nbsp;ud&nbsp;over&nbsp;Faaborg</h2>
             <blockquote style="margin:0 0 clamp(30px,4vw,48px);padding-left:clamp(20px,2.5vw,32px);border-left:2px solid #F5D68A;max-width:26em">
               <p style="margin:0;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,2.6vw,31px);line-height:1.35;color:#FFF8E3">„Fra bevaringsværdigt skrot til slot for 17 millioner.“</p>
               <cite style="display:block;margin-top:16px;font-style:normal;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#F1E6C4">Fyens Stiftstidende</cite>
@@ -319,7 +307,7 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px">
               <article style="background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
                 <div style="position:relative;width:100%;aspect-ratio:16/10;background:rgba(248,243,234,0.12)">
-                  <image-slot id="jb-medie-1" src="./billeder/medie-1-fyens-en-krone.webp" shape="rect" placeholder="Screenshot — fyens.dk: Købte for én krone"></image-slot>
+                  <image-slot id="jb-medie-1" src="./billeder/medie-1-fyens-en-krone.jpg" shape="rect" placeholder="Screenshot — fyens.dk: Købte for én krone"></image-slot>
                 </div>
                 <div style="padding:clamp(22px,2.8vw,30px);display:flex;flex-direction:column;gap:12px;flex:1">
                 <p style="margin:0;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#F5D68A">fyens.dk</p>
@@ -330,7 +318,7 @@
               </article>
               <article style="background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
                 <div style="position:relative;width:100%;aspect-ratio:16/10;background:rgba(248,243,234,0.12)">
-                  <image-slot id="jb-medie-2" src="./billeder/medie-2-fyens-forvandlingen.webp" shape="rect" placeholder="Screenshot — fyens.dk: Se forvandlingen"></image-slot>
+                  <image-slot id="jb-medie-2" src="./billeder/medie-2-fyens-forvandlingen.jpg" shape="rect" placeholder="Screenshot — fyens.dk: Se forvandlingen"></image-slot>
                 </div>
                 <div style="padding:clamp(22px,2.8vw,30px);display:flex;flex-direction:column;gap:12px;flex:1">
                 <p style="margin:0;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#F5D68A">fyens.dk</p>
@@ -341,7 +329,7 @@
               </article>
               <article style="background:rgba(248,243,234,0.07);border:1px solid rgba(248,243,234,0.18);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
                 <div style="position:relative;width:100%;aspect-ratio:16/10;background:rgba(248,243,234,0.12)">
-                  <image-slot id="jb-medie-3" src="./billeder/medie-3-det-rigtige-faaborg.webp" shape="rect" placeholder="Screenshot — Det Rigtige Faaborg"></image-slot>
+                  <image-slot id="jb-medie-3" src="./billeder/medie-3-det-rigtige-faaborg.jpg" shape="rect" placeholder="Screenshot — Det Rigtige Faaborg"></image-slot>
                 </div>
                 <div style="padding:clamp(22px,2.8vw,30px);display:flex;flex-direction:column;gap:12px;flex:1">
                 <p style="margin:0;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#F5D68A">Det Rigtige Faaborg</p>
@@ -355,6 +343,18 @@
           </div>
         </section>
       </sc-if>
+      <section style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;background:#FFFDF5;border:1px solid #E6D08F;border-radius:22px;padding:clamp(28px,4vw,48px)">
+          <div>
+            <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3vw,34px);line-height:1.2;color:#3A2A20">Vil du bo i Trippelhusene?</h2>
+            <p style="margin:12px 0 0;max-width:34em;font-size:16px;line-height:1.7;color:#4A3626">Hvis du ønsker en lejlighed i Trippelhusene, kan du skrive dig op ved at kontakte os.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button onClick="{{ goLedige }}" style="padding:14px 24px;border-radius:999px;background:#A8412D;color:#FFFFFF;border:none;font-size:15px;cursor:pointer" style-hover="background:#7E2E1E">Skriv dig på venteliste</button>
+            <a href="#kontakt" style="padding:14px 24px;border-radius:999px;background:#F2E0AE;color:#3A2A20;border:1px solid #E6D08F;border-bottom:1px solid #E6D08F;font-size:15px" style-hover="background:#E6D08F">Se kontaktinfo</a>
+          </div>
+        </div>
+      </section>
 
     </main>
   </sc-if>
@@ -421,8 +421,8 @@
             <p style="margin:0 0 16px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#A8412D">Galleri</p>
             <h2 style="margin:0;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.8vw,42px);line-height:1.14;color:#3A2A20">Huset og lejlighederne</h2>
           </div>
-        </div><div style="display:grid;grid-template-columns:{{ galCols }};gap:16px">
-          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galFacadeCol }};grid-row:{{ galFacadeRow }};aspect-ratio:{{ galFacadeAspect }};min-height:320px">
+        </div><div style="display:grid;grid-template-columns:{{ galCols }};gap:{{ galGap }}">
+          <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galFacadeCol }};grid-row:{{ galFacadeRow }};aspect-ratio:{{ galFacadeAspect }};min-height:{{ galFacadeMinH }}">
             <image-slot id="jb-o-galleri-1" shape="rect" placeholder="Facaden mod Oluf Bagers Gade" src="./billeder/oluf-galleri-1-facade.jpeg"></image-slot>
           </div>
           <div style="position:relative;min-width:0;width:100%;border-radius:18px;overflow:hidden;background:#E6D08F;grid-column:{{ galSmall }};aspect-ratio:4/3">
@@ -488,10 +488,11 @@
 
   <footer id="kontakt" style="background:#234A5E;color:#FFF3D1;scroll-margin-top:90px">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) 28px clamp(30px,4vw,44px)">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(30px,4vw,56px)">
+      <img src="./billeder/logo-creme.png" alt="Johansen Bolig" width="520" height="88" style="display:block;height:clamp(34px,3.6vw,42px);width:auto;margin:0 0 clamp(36px,5vw,56px)">
+      <div style="display:grid;grid-template-columns:{{ footerCols }};gap:clamp(30px,4vw,56px)">
         <div>
           <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#FFE08A">Kontakt</p>
-          <h2 style="margin:0 0 20px;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.4vw,38px);line-height:1.14;color:#FFF3D1">Skriv eller ring — vi svarer selv</h2>
+          <h2 style="margin:0 0 20px;font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.4vw,38px);line-height:1.14;color:#FFF3D1;text-wrap:balance">Skriv eller ring&nbsp;— vi svarer selv</h2>
           <p style="margin:0 0 8px;font-size:17px;line-height:1.7;color:#FFE08A"><a href="mailto:kontakt@johansenbolig.dk" style="overflow-wrap:anywhere;color:#FFE08A;border-bottom-color:rgba(255,224,138,0.4)">{{ email }}</a></p>
           <img src="./billeder/tlf-lys.png" alt="Telefonnummer" width="92" height="24" style="display:block;width:92px;height:auto;margin-top:4px">
         </div>
@@ -549,12 +550,19 @@ class Component extends DCLogic {
       goTrippel: () => this.go('trippel'),
       goOluf: () => this.go('oluf'),
       isMobile: this.state.mobile,
-      galCols: this.state.mobile ? 'minmax(0,1fr)' : 'repeat(6,minmax(0,1fr))',
-      galFacadeCol: this.state.mobile ? 'auto' : '1 / span 2',
+      galCols: this.state.mobile ? 'repeat(2,minmax(0,1fr))' : 'repeat(6,minmax(0,1fr))',
+      galFacadeCol: this.state.mobile ? '1 / -1' : '1 / span 2',
       galFacadeRow: this.state.mobile ? 'auto' : '1 / span 2',
-      galFacadeAspect: this.state.mobile ? '3/4' : 'auto',
+      galFacadeAspect: this.state.mobile ? '4/3' : 'auto',
       galSmall: this.state.mobile ? 'auto' : 'span 2',
       galWide: this.state.mobile ? 'auto' : 'span 3',
+      galFacadeMinH: this.state.mobile ? '0' : '320px',
+      galGap: this.state.mobile ? '10px' : '16px',
+      trippelGalCols: this.state.mobile ? 'repeat(2,minmax(0,1fr))' : 'repeat(auto-fit,minmax(min(100%,300px),1fr))',
+      footerCols: this.state.mobile ? 'repeat(auto-fit,minmax(min(100%,240px),1fr))' : 'minmax(0,1.6fr) repeat(3,minmax(0,1fr))',
+      medieWrap: this.state.mobile ? 'wrap' : 'balance',
+      medieFs: this.state.mobile ? 'clamp(20px,calc((100vw - 100px) / 10.6),28px)' : 'clamp(28px,3.8vw,42px)',
+      logoH: this.state.mobile ? '28px' : '42px',
       isDesktop: !this.state.mobile,
       heroDisplay: this.state.mobile ? 'block' : 'flex',
       heroMinHForside: this.state.mobile ? '0' : 'clamp(420px,60vw,620px)',
